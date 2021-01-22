@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>专家号挂号前台系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/X-admin/css/font.css">
+	<link rel="stylesheet" href="/X-admin/css/xadmin.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
+    <script src="/temp/X-admin/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/X-admin/js/xadmin.js"></script>
+    <script type="text/javascript">
+		// 重新生成验证码
+		function reloadImg(){
+			$('#img').attr('src','{:captcha_src()}?rand='+Math.random());
+		}
+	</script>
+
+</head>
+<body>
+    <!-- 中部开始 -->
+    <div class="wrapper">
+        <!-- 右侧主体开始 -->
+        <div class="page-content">
+          <div class="content">
+            <!-- 右侧内容框架，更改从这里开始 -->
+            <blockquote class="layui-elem-quote">
+                欢迎使用专家号挂号前台系统   <span class="f-14">v0.1</span>
+            </blockquote>
+            <fieldset class="layui-elem-field layui-field-title site-title">
+              <legend><a name="default">本院当前专家挂号情况</a></legend>
+            </fieldset>
+            <table class="layui-table">
+              <thead>
+                  <tr>
+                      <th>专家名</th>
+                      <th>所属科室</th>
+                      <th>当前剩余可挂号数量</th>
+                      <th>总计可挂号数量</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {volist name="AllSta" id="AllSta"}
+                  <tr>
+                      <td>{$AllSta.ename}</td>
+                      <td>{$AllSta.dname}</td>
+                      <td>{$AllSta.leftnum}</td>
+                      <td>{$AllSta.totalnum}</td>
+                  </tr>
+                  {/volist}
+              </tbody>
+            </table>
+            <fieldset class="layui-elem-field layui-field-title site-title">
+                <legend><a name="default">病患挂号</a></legend>
+            </fieldset>
+            <form class="layui-form layui-form-pane" action="patient/pdoreserve" method = "post">
+                <label class="login-title" for="pid">病患医保号</label>
+                <div class="layui-form-item">
+                    <label class="layui-form-label login-form"><i class="iconfont">&#xe6b8;</i></label>
+                    <div class="layui-input-inline login-inline">
+                      <input type="text" name="pid" lay-verify="required" placeholder="请输入病患医保号" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <label class="login-title" for="pname">病患姓名</label>
+                <div class="layui-form-item">
+                    <label class="layui-form-label login-form"><i class="iconfont">&#xe6b8;</i></label>
+                    <div class="layui-input-inline login-inline">
+                      <input type="text" name="pname" lay-verify="required" placeholder="请输入病患姓名" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <label class="login-title" for="ename">挂号专家姓名</label>
+                <div class="layui-form-item">
+                    <label class="layui-form-label login-form"><i class="iconfont">&#xe82b;</i></label>
+                    <div class="layui-input-inline login-inline">
+                      <input type="text" name="ename" lay-verify="required" placeholder="请输入专家名" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <label class="login-title" for="verifycode">验证码</label>
+                <div class="layui-form-item">
+                    <label class="layui-form-label login-form"><i class="iconfont">&#xe82b;</i></label>
+                    <div class="layui-input-inline login-inline">
+                        <input type="text" name="verifycode" lay-verify="required" placeholder="请输入图中验证码" autocomplete="off" class="layui-input" >
+                    </div>
+                    <div>
+                        <img src="{:captcha_src()}" id="img" onclick="reloadImg()">
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-warning pull-right" lay-submit lay-filter="login"  type="submit">确认挂号</button> 
+                </div>
+            </form>
+            <!-- 右侧内容框架，更改从这里结束 -->
+          </div>
+        </div>
+        <!-- 右侧主体结束 -->
+    </div>
+    <!-- 中部结束 -->
+    <!-- 底部开始 -->
+    <div class="footer">
+        <div class="copyright">Copyright ©2017 x-admin v2.3 All Rights Reserved. 本后台系统由X前端框架提供前端技术支持</div>  
+    </div>
+    <!-- 底部结束 -->
+</body>
+</html>

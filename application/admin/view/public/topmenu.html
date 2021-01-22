@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="logo"><a href="./index.html">专家号挂号后台系统 V0.1</a></div>
+    <div class="open-nav"><i class="iconfont">&#xe699;</i></div>
+    <ul class="layui-nav right" lay-filter="">
+      <li class="layui-nav-item">
+        {volist name="cur_name" id="name"}
+        <a href="javascript:;">{$name}</a>
+        {/volist}
+        <dl class="layui-nav-child"> <!-- 二级菜单 -->
+          <dd><a href="/admin/main/change">修改密码</a></dd>
+          <dd><a href="/admin/Login/logout">退出</a></dd>
+        </dl>
+      </li>
+      <li class="layui-nav-item"><a href="/admin/main/index">前台首页</a></li>
+    </ul>
+</div>

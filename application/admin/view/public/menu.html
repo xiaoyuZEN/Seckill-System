@@ -1,0 +1,14 @@
+<div class="left-nav">
+  <div id="side-nav">
+    <ul id="nav">
+        {volist name="nodelist" id="vo"}
+        <li class="list" current>
+            <a href="{$vo.url}">
+                <i class="iconfont">&#xe6a7;</i>
+                {$vo.name}
+            </a>
+        </li>
+        {/volist} 
+    </ul>
+  </div>
+</div>
